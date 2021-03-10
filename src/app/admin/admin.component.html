@@ -1,0 +1,29 @@
+<div class="admin_background">
+    <div class="container">
+        <div class="row" style="text-align: center;">
+            <mat-button-toggle-group style="margin-top: 100px;" name="fontStyle" aria-label="Font Style"
+                #group="matButtonToggleGroup" value="refuges">
+                <mat-button-toggle (change)="onValChange($event.value)" value="refuges">REFUGIOS</mat-button-toggle>
+                <mat-button-toggle (change)="onValChange($event.value)" value="doggies">PERRITOS</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    
+        <div class="row" style="text-align: end; margin-top: 36px;">
+            <button mat-flat-button color="primary" (click)="add()"> Agregar
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    
+        <div>
+            <div *ngIf="showRefuges; else showDogs" class="row">
+                <app-list-refuges></app-list-refuges>
+            </div>
+    
+            <ng-template #showDogs>
+                <app-list-dogs></app-list-dogs>
+            </ng-template>
+        </div>
+        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+        <div></div>
+    </div>
+</div>

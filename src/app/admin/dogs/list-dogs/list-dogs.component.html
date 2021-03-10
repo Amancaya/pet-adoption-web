@@ -1,0 +1,39 @@
+<div class="container" style="margin-top: 36px;">
+    <table class="mat-table">
+        <thead>
+            <tr class="mat-header-row">
+                <th class="mat-header-cell"> No. </th>
+                <th class="mat-header-cell"> Nombre </th>
+                <th class="mat-header-cell"> Genero </th>
+                <th class="mat-header-cell"> Descripcion </th>
+                <th class="mat-header-cell"> Edad </th>
+                <th class="mat-header-cell"> Refugio </th>
+                <th class="mat-header-cell"> Foto </th>
+                <th class="mat-header-cell"> Acciones </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="mat-row" *ngFor="let dog of dogs ;index as i" [attr.data-index]="i">
+                <td class="mat-cell"> {{ i + 1 }}</td>
+                <td class="mat-cell"> {{ dog.name }} </td>
+                <td class="mat-cell"> {{ getGenre(dog.genre) }} </td>
+                <td class="mat-cell"> {{ dog.description }} </td>
+                <td class="mat-cell"> {{ dog.age }} </td>
+                <td class="mat-cell"> {{ dog.refuge.name }} </td>
+                <td class="mat-cell"> 
+                    <img [src]="dog.image" width="100px" height="100px" alt="{{dog.name}}">
+                </td>
+                <td class="mat-cell">
+                    <button mat-mini-fab style="margin-right: 12px;" color="accent" (click)="editDog(dog)"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="deleteDog(dog)"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

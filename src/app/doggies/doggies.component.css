@@ -1,0 +1,27 @@
+.doggies_background {
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.filters {
+    margin-top: 24px;
+}
+
+.dog-card {
+    max-width: 400px;
+    margin-right: 16px;
+    margin-left: 16px;
+    margin-top: 16dx;
+}
+
+.dog-card:hover {
+    background-color: #bbf7f76b;
+}

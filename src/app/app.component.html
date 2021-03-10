@@ -1,0 +1,12 @@
+<mat-toolbar class="app-toolbar mat-elevation-z4">
+    <div>
+        <img src="../../assets/favicon-96x96.png" width="50px" height="50px" />
+    </div>
+    <div class="toolbar_buttons">
+        <button mat-button color="primary" (click)="goDoggies()">Perritos</button>
+        <button mat-button color="primary" (click)="goHome()">Acerca de</button>
+        <button *ngIf="isLogIn" mat-button color="primary" (click)="goAdmin()">Admin</button>
+    </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,26 @@
+.presentation_text {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    margin-top: 50px;
+    padding: 16px;
+}
+
+.mat-raised-button{
+    color: #369695 !important;
+}
+
+.title {
+
+    font-family: 'Raleway', sans-serif;
+}
+
+.description {
+    margin-top: 100px;
+    font-family: 'Grandstander', cursive;
+    size: 100px;
+}
+
+.base_style {
+    background-color: transparent;
+}

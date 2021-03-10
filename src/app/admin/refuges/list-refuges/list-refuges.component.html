@@ -1,0 +1,30 @@
+<div class="container" style="margin-top: 36px;">
+    <table class="mat-table">
+        <thead>
+            <tr class="mat-header-row">
+                <th class="mat-header-cell"> No. </th>
+                <th class="mat-header-cell"> Nombre </th>
+                <th class="mat-header-cell"> Encargad@ </th>
+                <th class="mat-header-cell"> Telefono </th>
+                <th class="mat-header-cell"> Acciones </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="mat-row" *ngFor="let refuge of refuges ;index as i" [attr.data-index]="i">
+                <td class="mat-cell"> {{ i + 1 }}</td>
+                <td class="mat-cell"> {{ refuge.name }} </td>
+                <td class="mat-cell"> {{ refuge.manager }} </td>
+                <td class="mat-cell"> {{ refuge.cellphone }} </td>
+                <td class="mat-cell">
+                    <button mat-mini-fab style="margin-right: 12px;" color="accent" (click)="editRefuge(refuge)" aria-label="Example icon button with a plus one icon">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="deleteRefuge(refuge)" aria-label="Example icon button with a plus one icon">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

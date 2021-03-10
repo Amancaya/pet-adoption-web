@@ -1,0 +1,65 @@
+<div>
+    <div class="doggies_background"></div>
+    <div class="container">
+        <div class="row filters">
+            <div class="col-xs-12 col-sm-4">
+                <mat-form-field appearance="fill">
+                    <mat-label>Organizacion</mat-label>
+                    <mat-select [(value)]="selectedOrg">
+                        <mat-option>Limpiar</mat-option>
+                        <mat-option *ngFor="let organization of organizations" [value]="organization">{{organization}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <mat-form-field appearance="fill">
+                    <mat-label>Genero</mat-label>
+                    <mat-select [(value)]="selectedGenre">
+                        <mat-option>Limpiar</mat-option>
+                        <mat-option value="M">Macho</mat-option>
+                        <mat-option value="H">Hembra</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <mat-form-field appearance="fill">
+                    <mat-label>Edad</mat-label>
+                    <mat-select [(value)]="selectedAge">
+                        <mat-option>Limpiar</mat-option>
+                        <mat-option value="0">Menos de 1 año</mat-option>
+                        <mat-option value="1">1 años</mat-option>
+                        <mat-option value="2">2 años</mat-option>
+                        <mat-option value="3">3 años</mat-option>
+                        <mat-option value="4">4 años</mat-option>
+                        <mat-option value="5">5 años</mat-option>
+                        <mat-option value="6">6 años</mat-option>
+                        <mat-option value="7">7 años</mat-option>
+                        <mat-option value="8">8 años</mat-option>
+                        <mat-option value="9">9 años</mat-option>
+                        <mat-option value="10">10 años</mat-option>
+                        <mat-option value="11">Mas de 10 años</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div *ngFor="let dog of dogs|filters: selectedOrg:selectedGenre:selectedAge"  style="margin-top: 24px;">
+            <div class="col-xs-12 col-sm-6 col-md-4" style="margin-top: 16px;">
+                <mat-card class="dog-card" (click)="callDogView(dog)">
+                    <img mat-card-image src="{{dog.image}}" height="230px" alt="Photo of a Shiba Inu">
+                    <mat-card-title>{{dog.name}}</mat-card-title>
+                    <mat-card-subtitle>{{getAge(dog.age)}} - {{getGenre(dog.genre)}}</mat-card-subtitle>
+                    <mat-card-content>
+                        <p>{{dog.refuge.name}}</p>
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: right;">
+                        <a mat-button [href]="getPhone(dog.refuge.cellphone)">LLAMAR</a>
+                        <a mat-button [href]="getWhatsApp(dog.refuge.cellphone)">WHATSAPP</a>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div> 
+</div>

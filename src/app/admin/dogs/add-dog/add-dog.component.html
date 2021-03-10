@@ -1,0 +1,125 @@
+<h2 mat-dialog-title>Agregar Perrito</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-xs-12 inputs">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese el nombre</mat-label>
+                <input matInput type="text" placeholder="Patitas..." [formControl]="name" required>
+                <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div class="col-xs-12 inputs">
+            <mat-form-field class="example-full-width">
+                <mat-label>Ingrese una descripcion</mat-label>
+                <textarea matInput placeholder="Descripcion del perrito" [formControl]="description"></textarea>
+            </mat-form-field>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-3 input">
+            <mat-form-field appearance="fill">
+                <mat-label>Nacimiento</mat-label>
+                <input matInput [matDatepicker]="dp" [formControl]="date">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+                    (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker"></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-xs-12 col-sm-3">
+            <mat-form-field appearance="fill">
+                <mat-label>Genero</mat-label>
+                <mat-select [(value)]="selectedGenre">
+                    <mat-option value="M">Macho</mat-option>
+                    <mat-option value="H">Hembra</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 inputs">
+            <mat-form-field appearance="fill">
+                <mat-label>Organizacion</mat-label>
+                <mat-select [(value)]="selectedOrg">
+                    <mat-option *ngFor="let organization of refuges" [value]="organization.name">
+                        {{organization.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-xs-12 inputs">
+
+            <div *ngIf="isEdit && !imageDelete">
+                <div class="row" style="display: block; text-align: center">
+                    <h3 mat-h3>Imagen subida</h3>
+                    <img src="{{dog.image}}">
+                    <button mat-button color="warn" (click)="deleteFileForEdit()">
+                        <mat-icon>delete</mat-icon>Eliminar
+                    </button>
+                </div>
+            </div>
+
+            <div class="row hidden-xs" *ngIf="isntInStorage" style="padding: 0px 20px;">
+                <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUploadImage($event)"
+                    [class.hovering]="isHovering">
+
+                    <h3>Subir foto</h3>
+                    <div class="file">
+                        <label class="file-label">
+                            <input #inputDocumentWeb class="file-input" type="file"
+                                (change)="startUploadImage($event.target.files)">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fa fa-upload"></i>
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="isntInStorage" style="padding: 0px 20px;">
+                <div *ngIf="percentage | async as pct">
+                    <progress class="progress-bar" [value]="pct" max="100">
+                    </progress>
+                    {{ pct | number }}%
+                </div>
+            </div>
+
+            <div class="row" style="padding: 0px 20px;">
+                <div *ngIf="snapshot | async as snap">
+                    {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
+                    <div *ngIf="isntInStorage == false">
+                        <div class="thumbnail" *ngFor="let file of filesUploaded">
+                            <div class="row" style="display: block; text-align: center">
+                                <h3 mat-h3>Archivo subido</h3>
+                                <a class="btn btn-info" [href]="filesUploaded[0]" target="_blank">
+                                    <mat-icon>cloud_download</mat-icon>
+                                </a>
+
+                                <img [src]="fb">
+                                <button mat-button color="warn" (click)="deleteFileStorage()">
+                                    <mat-icon>delete</mat-icon>Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button mat-button *ngIf="isntInStorage" (click)="task.pause()" class="btn btn-warning"
+                        [disabled]="!isActive(snap)">Pause</button>
+                    <button mat-button *ngIf="isntInStorage" (click)="task.cancel()" class="btn btn-danger"
+                        [disabled]="!isActive(snap)">Cancel</button>
+                    <button mat-button *ngIf="isntInStorage" (click)="task.resume()" class="btn btn-info"
+                        [disabled]="!(snap?.state === 'paused')">Resume</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-stroked-button color="primary" [mat-dialog-close]="true" (click)="saveUpdateDog()"
+        cdkFocusInitial>Guardar</button>
+</mat-dialog-actions>

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Agregar un refugio</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-xs-12 inputs">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese el nombre</mat-label>
+                <input matInput type="text" placeholder="Patitas..." [formControl]="name" required>
+                <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-xs-12 inputs">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese el telefono</mat-label>
+                <input matInput type="text" placeholder="728..." [formControl]="cellphone" required>
+                <mat-error *ngIf="cellphone.invalid">{{getErrorCellphoneMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-xs-12 inputs">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese el nombre del encargado</mat-label>
+                <input matInput type="text" placeholder="Encargado..." [formControl]="manager" required>
+                <mat-error *ngIf="manager.invalid">{{getErrorManagerMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-stroked-button color="primary" [mat-dialog-close]="true" (click)="saveUpdateRefuge()" cdkFocusInitial>Guardar</button>
+</mat-dialog-actions>

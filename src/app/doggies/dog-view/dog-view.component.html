@@ -1,0 +1,13 @@
+<mat-dialog-content class="mat-typography">
+    <img src="{{dog.image}}" width="300px" height="230px" alt="Photo of a Shiba Inu">
+    <mat-card-title style="margin-top: 16px;">{{dog.name}}</mat-card-title>
+    <mat-card-subtitle>{{getAge(dog.age)}} - {{getGenre(dog.genre)}} - {{dog.refuge.name}}</mat-card-subtitle>
+    <mat-card-content>
+        <p>{{dog.description}}</p>
+    </mat-card-content>
+
+</mat-dialog-content>
+<mat-card-actions style="text-align: right;">
+    <a mat-button [href]="getPhone(dog.refuge.cellphone)">LLAMAR</a>
+    <a mat-button [href]="getWhatsApp(dog.refuge.cellphone)">WHATSAPP</a>
+</mat-card-actions>
